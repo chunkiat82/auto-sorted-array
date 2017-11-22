@@ -1,0 +1,30 @@
+{
+  "name": "auto-sorting-array",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rlb",
+    "test": "babel-node spec/run.js"
+  },
+  "module": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/chunkiat82/auto-sorting-array.git"
+  },
+  "author": "Raymond Ho",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chunkiat82/auto-sorting-array/issues"
+  },
+  "homepage": "https://github.com/chunkiat82/auto-sorting-array#readme",
+  "devDependencies": {
+    "@comandeer/rollup-lib-bundler": "^0.3.0",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "chai": "^4.1.2",
+    "jasmine": "^2.8.0",
+    "jasmine-console-reporter": "^2.0.1"
+  }
+}
