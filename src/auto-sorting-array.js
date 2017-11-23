@@ -32,6 +32,11 @@ export default class AutoSortingArray {
     }
 
     get(index) {
+        const value = this.holder.sortedArray[index];        
+        return value;
+    }
+
+    getByIndex(index) {
         const value = this.holder.sortedArray[index];
         ++this.holder.sortedArray[index].count;
         // console.time("sortArray");
