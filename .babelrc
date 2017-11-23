@@ -1,6 +1,4 @@
 {
-	"plugins": [
-		"transform-es2015-modules-commonjs",
-		"add-module-exports"
-	]
+  "presets": ["latest"],
+  "plugins": ["transform-object-rest-spread"]
 }

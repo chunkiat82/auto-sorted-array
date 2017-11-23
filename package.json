@@ -1,30 +1,58 @@
 {
   "name": "auto-sorting-array",
-  "version": "1.0.0",
+  "version": "1.3.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/auto-sorting-array.js",
   "scripts": {
-    "build": "rlb",
-    "test": "babel-node spec/run.js"
+    "test": "gulp",
+    "lint": "gulp lint",
+    "test-browser": "gulp test-browser",
+    "watch": "gulp watch",
+    "build": "gulp build",
+    "coverage": "gulp coverage"
   },
-  "module": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/chunkiat82/auto-sorting-array.git"
+    "url": "https://github.com/chunkiat82/auto-sorting-array.git"
   },
-  "author": "Raymond Ho",
+  "keywords": [],
+  "author": "Raymond Ho <chunkiat82@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/chunkiat82/auto-sorting-array/issues"
   },
-  "homepage": "https://github.com/chunkiat82/auto-sorting-array#readme",
+  "homepage": "https://github.com/chunkiat82/auto-sorting-array",
   "devDependencies": {
-    "@comandeer/rollup-lib-bundler": "^0.3.0",
-    "babel-cli": "^6.26.0",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
-    "chai": "^4.1.2",
-    "jasmine": "^2.8.0",
-    "jasmine-console-reporter": "^2.0.1"
+    "babel-core": "6.14.0",
+    "babel-loader": "6.2.5",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "6.13.0",
+    "babel-preset-latest": "6.14.0",
+    "babel-register": "6.14.0",
+    "chai": "3.5.0",
+    "del": "2.2.2",
+    "glob": "7.0.6",
+    "gulp": "3.9.1",
+    "gulp-eslint": "3.0.1",
+    "gulp-filter": "4.0.0",
+    "gulp-istanbul": "1.1.1",
+    "gulp-livereload": "3.8.1",
+    "gulp-load-plugins": "1.2.4",
+    "gulp-mocha": "3.0.1",
+    "gulp-plumber": "1.1.0",
+    "gulp-rename": "1.2.2",
+    "gulp-sourcemaps": "1.6.0",
+    "gulp-uglify": "2.0.0",
+    "isparta": "4.0.0",
+    "json-loader": "0.5.4",
+    "mocha": "3.0.2",
+    "sinon": "1.17.5",
+    "sinon-chai": "2.8.0",
+    "webpack": "1.13.2",
+    "webpack-stream": "3.2.0"
+  },
+  "babelBoilerplateOptions": {
+    "entryFileName": "auto-sorting-array.js",
+    "mainVarName": "autoSortingArray"
   }
 }
