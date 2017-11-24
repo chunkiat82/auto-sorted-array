@@ -48,16 +48,18 @@ describe('The Array Itself', () => {
         for (let i = sortedArray.length - 1; i >= 0; i--) {
             const item = sortedArray[i];
             expect(item.count).to.be.gte(count);
+            expect(item.count).to.be.gte(1);
             count = item.count;
         }
     });
 
     it('ensure that all count values are from small to big (reverse order) in GetByKey', () => {
         const inputArray = [{ 'id': 'apple' }, { 'id': 'orange' }, { 'id': 'banana' }];
-        const ast = new AutoSortedArray(inputArray);
+        const ast = new AutoSortedArray(inputArray, 'id');
 
-        for (let i = 0; i < 1000; i++) {
-            const out =  ast.getByKey('id', inputArray[Math.floor((Math.random() * 3))].id);
+        for (let i = 0; i < 10; i++) {
+            const id = inputArray[Math.floor((Math.random() * 3))].id;            
+            const out =  ast.getByKey(id);
             expect(out).to.not.be.null;
         }
 
@@ -68,8 +70,21 @@ describe('The Array Itself', () => {
         for (let i = sortedArray.length - 1; i >= 0; i--) {
             const item = sortedArray[i];
             expect(item.count).to.be.gte(count);
+            expect(item.count).to.be.gte(1);
             count = item.count;
+        }        
+    });
+
+    it('ensure that map holds the same object as array', () => {
+        const inputArray = [{ 'id': 'apple' }, { 'id': 'orange' }, { 'id': 'banana' }];
+        const ast = new AutoSortedArray(inputArray, 'id');
+
+        for (let i = 0; i < 10; i++) {
+            const id = 'banana';            
+            const out =  ast.getByKey(id);
+            expect(out).to.not.be.null;
         }
-        // console.error(sortedArray);
+
+        expect(ast.get(0).count).to.be.equal(11);        
     });
 });

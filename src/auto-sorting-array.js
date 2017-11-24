@@ -1,24 +1,35 @@
-function convertArrayToSortedArray(inputArray) {
-    const bubbleArray = [];
+function convertArrayToArrayAndMap(inputArray, indexName) {
+
+    const sortedArray = [];
+    const map = {}
     inputArray.forEach((item) => {
-        bubbleArray[bubbleArray.length] = { count: (item.count || 1), ...item };
+        const index = sortedArray.length;
+        sortedArray[index] = { index, count: (item.count || 1), ...item };
+        if (indexName !== undefined) {            
+            map[item[indexName]] = sortedArray[index];
+        }        
     });
-    bubbleArray.sort((a, b) => b.count - a.count);
-    return bubbleArray;
+    sortedArray.sort((a, b) => b.count - a.count);
+
+    return { array: sortedArray, map };
 }
 
 function sortArray(index, holder) {
-    const { sortedArray } = holder;
+    const { array } = holder;
 
     let currentIndex = index;
 
     for (let i = index - 1; i >= 0; i--) {
-        const temp = sortedArray[i];
-        const current = sortedArray[currentIndex];
+        const temp = array[i];
+        const current = array[currentIndex];
         if (current.count > temp.count) {
-            sortedArray[i] = current;
-            sortedArray[currentIndex] = temp;
+            current.index=temp.index;
+            temp.index=currentIndex;
+
+            array[i] = current;
+            array[currentIndex] = temp;            
             currentIndex = i;
+            
         } else {
             break;
         }
@@ -27,36 +38,33 @@ function sortArray(index, holder) {
 
 export default class AutoSortingArray {
 
-    constructor(inputArray) {
-        this.holder = { "sortedArray": convertArrayToSortedArray(inputArray) };
+    constructor(inputArray, indexName) {
+        if (inputArray === undefined) throw new Error("constructor has missing values");
+
+        const { array, map } = convertArrayToArrayAndMap(inputArray, indexName);        
+        this.holder = { array , map };
     }
 
     get(index) {
-        const value = this.holder.sortedArray[index];        
+        const value = this.holder.array[index];        
         return value;
     }
 
     getByIndex(index) {
-        const value = this.holder.sortedArray[index];
-        ++this.holder.sortedArray[index].count;
+        const value = this.holder.array[index];
+        ++this.holder.array[index].count;
         // console.time("sortArray");
         sortArray(index, this.holder);
         // console.timeEnd("sortArray");
         return value;
     }
 
-    getByKey(key, value) {
-
-        for (let index = 0; index < this.holder.sortedArray.length; index++) {
-            if (this.holder.sortedArray[index][key] === value) {
-               return this.get(index);
-            }
-        }
-
-        return null;
+    getByKey(key) {
+        const item =  this.holder.map[key];
+        return this.getByIndex(item.index)        
     }
 
     getArray() {
-        return this.holder.sortedArray;
+        return this.holder.array;
     }
 }
