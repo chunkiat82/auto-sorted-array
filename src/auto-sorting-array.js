@@ -46,20 +46,20 @@ export default class AutoSortingArray {
     }
 
     peek(index) {
-        const value = this.holder.array[index];        
-        return value;
+        const item = this.holder.array[index];        
+        return item;
     }
 
-    peekByKey(index) {
+    peekByKey(key) {
         const item =  this.holder.map[key];      
-        return value;
+        return item;
     }
 
     get(index) {
-        const value = this.holder.array[index];
+        const item = this.holder.array[index];
         ++this.holder.array[index].count;        
         sortArray(index, this.holder);        
-        return value;
+        return item;
     }
 
     getByKey(key) {
