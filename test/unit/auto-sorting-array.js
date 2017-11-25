@@ -18,7 +18,7 @@ describe('The Array Itself', () => {
         const ast = new AutoSortedArray(['apple', 'orange', 'pear', 'banana', 'durian', 'strawberry', 'blueberry', 'blackberry', 'raspberry', 'dragonfruit']);
 
         for (var i = 0; i < 10000; i++) {
-            const out = ast.get(Math.floor((Math.random() * 10)));
+            const out = ast.peek(Math.floor((Math.random() * 10)));
             expect(out).to.not.be.null;
         }
 
@@ -37,7 +37,7 @@ describe('The Array Itself', () => {
         const ast = new AutoSortedArray(['apple', 'orange', 'pear', 'banana', 'durian', 'strawberry', 'blueberry', 'blackberry', 'raspberry', 'dragonfruit']);
 
         for (var i = 0; i < 10000; i++) {
-            const out = ast.getByIndex(Math.floor((Math.random() * 10)));
+            const out = ast.get(Math.floor((Math.random() * 10)));
             expect(out).to.not.be.null;
         }
 
@@ -85,6 +85,6 @@ describe('The Array Itself', () => {
             expect(out).to.not.be.null;
         }
 
-        expect(ast.get(0).count).to.be.equal(11);        
+        expect(ast.peek(0).count).to.be.equal(11);        
     });
 });

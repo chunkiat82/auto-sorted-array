@@ -1,12 +1,12 @@
-function convertArrayToArrayAndMap(inputArray, indexName) {
+function convertArrayToArrayAndMap(inputArray, keyName) {
 
     const sortedArray = [];
     const map = {}
     inputArray.forEach((item) => {
         const index = sortedArray.length;
         sortedArray[index] = { index, count: (item.count || 1), ...item };
-        if (indexName !== undefined) {            
-            map[item[indexName]] = sortedArray[index];
+        if (keyName !== undefined) {            
+            map[item[keyName]] = sortedArray[index];
         }        
     });
     sortedArray.sort((a, b) => b.count - a.count);
@@ -38,30 +38,33 @@ function sortArray(index, holder) {
 
 export default class AutoSortingArray {
 
-    constructor(inputArray, indexName) {
+    constructor(inputArray, keyName) {
         if (inputArray === undefined) throw new Error("constructor has missing values");
 
-        const { array, map } = convertArrayToArrayAndMap(inputArray, indexName);        
+        const { array, map } = convertArrayToArrayAndMap(inputArray, keyName);        
         this.holder = { array , map };
     }
 
-    get(index) {
+    peek(index) {
         const value = this.holder.array[index];        
         return value;
     }
 
-    getByIndex(index) {
+    peekByKey(index) {
+        const item =  this.holder.map[key];      
+        return value;
+    }
+
+    get(index) {
         const value = this.holder.array[index];
-        ++this.holder.array[index].count;
-        // console.time("sortArray");
-        sortArray(index, this.holder);
-        // console.timeEnd("sortArray");
+        ++this.holder.array[index].count;        
+        sortArray(index, this.holder);        
         return value;
     }
 
     getByKey(key) {
-        const item =  this.holder.map[key];
-        return this.getByIndex(item.index)        
+        const item = this.holder.map[key];
+        return this.get(item.index);
     }
 
     getArray() {
