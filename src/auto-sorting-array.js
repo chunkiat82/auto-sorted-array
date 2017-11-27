@@ -2,15 +2,28 @@ function convertArrayToArrayAndMap(inputArray, keyName) {
 
     const sortedArray = [];
     const map = {}
-    inputArray.forEach((item) => {
-        const index = sortedArray.length;
-        sortedArray[index] = { index, count: (item.count || 1), ...item };
+    inputArray.sort((a, b) => {
+        if (!b.count || !a.count ) return 1;
+        return b.count - a.count
+    });
+
+    // console.log(inputArray);
+
+    inputArray.forEach((item, index) => {      
+        // console.log(index);
+        if (Object.getPrototypeOf( item ) === Object.prototype ) {
+            item.index = index;
+        } else {
+            item = { value: item, index };
+        }
+        
+        sortedArray[index] = { count: (item.count || 1), ...item };
         if (keyName !== undefined) {            
             map[item[keyName]] = sortedArray[index];
         }        
     });
-    sortedArray.sort((a, b) => b.count - a.count);
 
+    //  console.log(map);
     return { array: sortedArray, map };
 }
 
@@ -64,6 +77,8 @@ export default class AutoSortingArray {
 
     getByKey(key) {
         const item = this.holder.map[key];
+        // console.log(item);
+        // console.log(this.holder.array);
         return this.get(item.index);
     }
 

@@ -1,6 +1,6 @@
 {
   "name": "auto-sorting-array",
-  "version": "4.0.2",
+  "version": "4.5.0",
   "description": "",
   "main": "dist/auto-sorting-array.js",
   "scripts": {
